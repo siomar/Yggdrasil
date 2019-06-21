@@ -1,18 +1,38 @@
-import React from "react";
-
-import { View, Text, Button } from "react-native";
+import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-import { Div } from "./styles";
+import { Div, Button, ButtonText, Input } from "./styles";
+import { bindActionCreators } from "redux";
+import { Creators as LoginActions } from "../../store/ducks/login";
 
-const Home = ({ navigation, inicio }) => (
-  <Div>
-    <Button onPress={e => navigation.navigate("About")} title="Send to About" />
-  </Div>
-);
-const mapStateToProps = state => ({
-  inicio: state
-});
+class Home extends Component {
+  handleLogin = () => {
+    // this.props.navigation.navigate("About");
+    this.props.signUpRequest("siomar");
+  };
+  render() {
+    return (
+      <Div>
+        <Input autoCapitalize="none" autoCorrect={false} placeholder="login" />
+        <Button onPress={e => this.handleLogin()}>
+          <ButtonText>Send</ButtonText>
+        </Button>
+      </Div>
+    );
+  }
+}
 
-export default connect(mapStateToProps)(Home);
+const mapStateToProps = state => {
+  return {
+    inicio: state.login
+  };
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(LoginActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
