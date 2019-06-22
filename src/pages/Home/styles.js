@@ -8,6 +8,13 @@ export const Div = styled.View`
   background: #ee9ca7;
 `;
 
+export const DivImg = styled.View`
+  margin-bottom: 30px;
+  align-items: center;
+  justify-content: center;
+  height: 58px;
+`;
+
 export const Input = styled.TextInput.attrs({
   placeholderTextColor: "#999"
 })`
